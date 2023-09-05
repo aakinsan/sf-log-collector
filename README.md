@@ -1,6 +1,8 @@
-![GitHub all releases](https://img.shields.io/github/downloads/aakinsan/sf-log-collector/total)
-![GitHub language count](https://img.shields.io/github/languages/count/aakinsan/sf-log-collector)
-![GitHub top language](https://img.shields.io/github/languages/top/aakinsan/sf-log-collector?color=yellow)
+![image](https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
+![image](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+![image](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
+![image](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+
 # Salesforce Logs and Audit Trails Collector
 
 This project was created with the following objectives:
@@ -27,7 +29,7 @@ Authorization to the Salesforce API is achieved via Oauth 2.0 JSON Web Token (JW
 ### Assumptions & Dependencies
 - You have an existing GCP project available to deploy the GCP infrastructure and the client applications.
 
-- You have setup a connected app in Salesforce and uploaded a digital certificate required to verify the JWT signature from the SFELC and SFATC client apps. Refer [here](https://help.salesforce.com/s/articleView?id=sf.connected_app_create_api_integration.htm&type=5) on how to setup a Salesforce connected app.
+- You have setup a connected app in Salesforce and uploaded a digital certificate required to verify the JWT signature from the SFELC and SFATC client apps. Refer [here](https://help.salesforce.com/s/articleView?id=sf.connected_app_create.htm&type=5) on how to setup a Salesforce connected app.
 
 - You have stored the private key (that will be used by the client apps to sign the JWTs) in GCP Secret Manager.
 
@@ -70,7 +72,7 @@ This consists of 3 steps:
       - `EVENT_TYPES`  The event type log files to fetch from salesforce.
 
 
-2. Run `terraform init` to initialize the terraform configuration 
+2. Run `terraform init` to initialize terraform. 
 
 ```terraform
 user_@cloudshell:~$ terraform init
@@ -83,7 +85,6 @@ Initializing modules...
 
 Initializing provider plugins...
 ```
-
 
 3. Run `terraform apply -auto-approve` to deploy.
 
