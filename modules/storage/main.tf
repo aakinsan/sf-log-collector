@@ -24,7 +24,7 @@ resource "google_artifact_registry_repository" "repo" {
 # Create Storage Bucket
 resource "google_storage_bucket" "sf_log_bucket" {
     name = var.cloud_storage_bucket
-    location = var.region # Multi or Dual regions -> better HA, costlier, data stored in US
+    location = var.region
     force_destroy = true
     project = var.project_id
     storage_class = var.storage_class
