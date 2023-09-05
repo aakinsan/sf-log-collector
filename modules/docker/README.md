@@ -6,4 +6,4 @@
 
  - Pushes the docker images to Google Artifact Registry.
 
- - Provides the names of the docker images for consumption by the Cloud Run instances defined in the serverless module.
+ - Provides the names of the docker images in 'outputs.tf' for consumption by the Cloud Run instances defined in the serverless module.
