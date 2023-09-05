@@ -1,6 +1,6 @@
-![GitHub all releases](https://img.shields.io/github/downloads/{username}/{repo-name}/total)
-![GitHub language count](https://img.shields.io/github/languages/count/{username}/{repo-name})
-![GitHub top language](https://img.shields.io/github/languages/top/{username}/{repo-name}?color=yellow)
+![GitHub all releases](https://img.shields.io/github/downloads/aakinsan/sf-log-collector/total)
+![GitHub language count](https://img.shields.io/github/languages/count/aakinsan/sf-log-collector)
+![GitHub top language](https://img.shields.io/github/languages/top/aakinsan/sf-log-collector?color=yellow)
 # Salesforce Logs and Audit Trails Collector
 
 This project was created with the following objectives:
@@ -9,7 +9,7 @@ This project was created with the following objectives:
 
 ## Description
 
-Two client applications will be deployed with each running on a Cloud Run Instance. They include: 
+Two client applications will be deployed with each running on a Cloud Run Instance. They include a: 
 
 - **Salesforce Event Log Collector (SFELC)**: This collects [event log files](https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_eventlogfile_supportedeventtypes.htm) at hourly intervals. The application downloads the latest CSV log file, converts the CSV file to JSON and uploads it to a GCP storage bucket.
 
@@ -34,9 +34,9 @@ Authorization to the Salesforce API is achieved via Oauth 2.0 JSON Web Token (JW
 - You are running terraform client either in GCP cloud shell or on a workstation and the client is using an account with the required IAM permissions to deploy the infrastructure in GCP. 
 
 ### Usage
-This consists of 3 main steps:
+This consists of 3 steps:
 
-1. Clone repository and populate the provided **terraform.tfvars** file with the following information:
+1. Clone the repository and populate the provided **terraform.tfvars** file with the following information:
     - `project_id`  The existing Google Project ID.
 
     - `secrets_project_id`  The existing project ID where the secret (private key) resides; This could be the same or different from the Project ID above.
@@ -69,6 +69,7 @@ This consists of 3 main steps:
 
       - `EVENT_TYPES`  The event type log files to fetch from salesforce.
 
+
 2. Run `terraform init` to initialize the terraform configuration 
 
 ```terraform
@@ -83,6 +84,7 @@ Initializing modules...
 Initializing provider plugins...
 ```
 
+
 3. Run `terraform apply -auto-approve` to deploy.
 
 ```terraform
@@ -92,9 +94,6 @@ Terraform used the selected providers to generate the following execution plan. 
 
 Terraform will perform the following actions:
 ``` 
-
-## Contributing
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details
