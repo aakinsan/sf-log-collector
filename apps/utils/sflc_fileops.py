@@ -66,7 +66,6 @@ def upload_to_storage_bucket(google_project_id: str, storage_bucket: str) -> Non
 def write_to_bucket_blobs(storage_bucket: Bucket) -> None:
     # Generated JSON files are uploaded to a Cloud Storage folder
     # Filename format in Cloud Storage will be 'YY-mm-ddTHH:MM:SSZ-logfile.json'
-    # All CSV and JSON files are deleted from the working directory after successful upload
     current_working_dir = Path.cwd()
     json_files = current_working_dir.glob("*.json")
     date_time_format = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
