@@ -1,3 +1,5 @@
+# Root Module
+# Declaring Required Providers
 terraform {
     required_providers {
         google = {
@@ -12,12 +14,14 @@ terraform {
     }
 }
 
+# Google Provider
 provider "google" {
     project = var.project_id
     region = var.region
     zone = var.zone
 }
 
+# Docker Provider
 provider "docker" {
     host = "unix:///var/run/docker.sock"
     registry_auth {
@@ -27,9 +31,13 @@ provider "docker" {
     }
 }
 
+# Reading this data provider results in Terraform persisting the access token (used by terraform to authenticate against the Google Cloud API) in its state file
+# This token is required by the docker provider to authenticate to the Artifact Registry when pushing the docker image
+# Proper precautions should be taken to protect the state file.
 data "google_client_config" "default" {
 }
 
+# Module to build and push docker images
 module "docker" {
     source = "./modules/docker"
     project_id = var.project_id
@@ -37,6 +45,7 @@ module "docker" {
     repo_name = module.storage.repository_name
 }
 
+# Module for IAM permissions for the Service Accounts
 module "iam" {
     source = "./modules/iam"
     project_id = var.project_id
@@ -50,6 +59,7 @@ module "iam" {
     sfatc_job_name = module.serverless.sfatc_job  
 }
 
+# Module for the Cloud Run Instances and Cloud Scheduler
 module "serverless" {
     source = "./modules/serverless"
     project_id = var.project_id
@@ -65,6 +75,7 @@ module "serverless" {
     depends_on = [ module.storage ]
 }
 
+# Module for the Cloud Storage Bucket and Artifact Registry
 module "storage" {
     source = "./modules/storage"  
     project_id = var.project_id
