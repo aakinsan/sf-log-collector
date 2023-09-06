@@ -20,5 +20,14 @@ COPY utils/ /app/utils/
 # Copy local code to the container image.
 COPY ./sfatc/. /app
 
+# Create the app user.
+RUN useradd -m sflcuser
+
+# Change the owner of the working directory to sflcuser
+RUN chown sflcuser .
+
+# Change the user from root to sflcuser
+USER sflcuser
+
 # Run the web service on container startup.
 CMD [ "python", "./sfatc.py" ]
