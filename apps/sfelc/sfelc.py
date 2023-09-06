@@ -76,7 +76,7 @@ def get_event_log_files(
 # Get Private Key
 private_key = get_private_key(GOOGLE_SECRETS_PROJECT_ID, SECRET_ID)
 
-# Get Event Types
+# Get Event Types as a List object
 event_types = EVENT_TYPES.split(", ")
 
 # Start script
