@@ -90,7 +90,7 @@ Initializing provider plugins...
 3. Run `terraform apply -auto-approve` to deploy.
 
 ```terraform
-user_@cloudshell:~$ terraform apply
+user_@cloudshell:~$ terraform apply -auto-approve
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
   + create
 
