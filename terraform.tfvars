@@ -10,26 +10,24 @@ The storage bucket's storage class is set by default to 'STANDARD' and the Regio
 You can change this default values here
 */
 
-
-/*
-project_id = "my-project-id"
-cloud_storage_bucket = "my-cloud-storage-bucket-name"
+project_id = "log-collector-420416"
+cloud_storage_bucket = "sf-log-bucket"
 storage_class = "STANDARD"
-secrets_project_id = "the-project-id-my-secret-is-stored" 
+secrets_project_id = "log-collector-420416"
 region = "northamerica-northeast1"
-repo_name = "my_repository_name"
+repo_name = "sf_repo"
 zone = "northamerica-northeast1-a"
-secret_id = "my-secret-id-in-gcp-secret-manager"
+secret_id = "salesforce-log-collector-secret"
 env = {    
-    "GOOGLE_PROJECT_ID" = "my-project-id"    
-    "CLIENT_ID" = "6WEW9EEoVowirFO9Vqw1R33euACX3ugw2195QWDDOCgi9.TefrewwetrG43sdfds45DROGfswojodfHqerF9c"    
+    "GOOGLE_PROJECT_ID" = "log-collector-420416"  
+    "CLIENT_ID" = "3MVG9M43irr9JAuzzDZiDMO2XlC1gz2Ok22vBnK5Nj6yZLocN0QnP5jc4joSXeusrlwO.JQ_qsSW09fiDvJNW"    
     "AUDIENCE" = "https://test.salesforce.com"     
-    "SUBJECT" = "john.doe@foobar.com"    
-    "SECRET_ID" = "my-secret-id-in-gcp-secret-manager"    
-    "CLOUD_STORAGE_BUCKET" = "my-cloud-storage-bucket-name"    
+    "SUBJECT" = "log.collector@cogeco.com.epccpq1"    
+    "SECRET_ID" = "salesforce-log-collector-secret"    
+    "CLOUD_STORAGE_BUCKET" = "sf-log-bucket"    
     "TOKEN_ENDPOINT" = "https://test.salesforce.com/services/oauth2/token"    
-    "GOOGLE_SECRETS_PROJECT_ID" = "the-project-id-my-secret-is-stored"    
+    "GOOGLE_SECRETS_PROJECT_ID" = "log-collector-420416"    
     "EVENT_TYPES" = "Login, Logout, URI, RestApi, API, Report, ReportExport, BulkApi, BulkApi2, LoginAs"
     }  
-*/
+
 
