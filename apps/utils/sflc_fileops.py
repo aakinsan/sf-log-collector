@@ -43,6 +43,7 @@ def get_latest_log_file_url(data: dict) -> str:
     return path_to_latest_log_file
 
 
+"""
 def convert_csv_file_to_json(csv_file_name: str, downloaded_file: bytes) -> None:
     # Latest Log file in csv format downloaded from salesforce is converted to json
     with open(csv_file_name, "wb") as file:
@@ -55,12 +56,47 @@ def convert_audit_to_json(data: dict) -> None:
     # Audit Trail Logs retrieved from Salesforce is converted to json
     with open("audit_trail.json", "w") as file:
         json.dump(data, file)
+"""
+
+
+def convert_audit_trail_to_json_files(data: list) -> None:
+    # Audit Trail Logs retrieved from Salesforce is converted to JSON files.
+    # Each record is written to a single JSON file.
+
+    file_ext = 0  # Required to make each file unique.
+    for record in data:
+        file_ext += 1
+        with open(f"Audit_Trail.{file_ext}", "w") as file:
+            json.dump(record, file)
+
+
+def convert_csv_file_to_json_files(csv_file_name: str, downloaded_file: bytes) -> None:
+    # Each entry in the CSV Log file downloaded from salesforce is converted to a json file
+
+    # Write raw data in CSV format to CSV file.
+    with open(csv_file_name, "wb") as file:
+        file.write(downloaded_file)
+    csv_file = pd.read_csv(csv_file_name)
+
+    # Convert csv file to python object.
+    records = csv_file.to_dict(orient="records")
+
+    # Delete CSV file.
+    Path(csv_file_name).unlink()
+
+    # Write each event to a JSON file.
+    file_ext = 0  # Required to make each file unique
+    for record in records:
+        file_ext += 1
+        with open(f"{csv_file_name}.{file_ext}", "w") as file:
+            json.dump(record, file)
+
 
 def upload_to_storage_bucket(google_project_id: str, storage_bucket: str) -> None:
-        # Uploads all Log files to the cloud storage bucket        
-        storage_client = storage.Client(project=google_project_id)
-        log_storage_bucket = storage_client.get_bucket(storage_bucket)
-        write_to_bucket_blobs(log_storage_bucket)
+    # Uploads all Log files to the cloud storage bucket
+    storage_client = storage.Client(project=google_project_id)
+    log_storage_bucket = storage_client.get_bucket(storage_bucket)
+    write_to_bucket_blobs(log_storage_bucket)
 
 
 def write_to_bucket_blobs(storage_bucket: Bucket) -> None:
