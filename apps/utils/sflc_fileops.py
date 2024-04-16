@@ -103,12 +103,14 @@ def write_to_bucket_blobs(storage_bucket: Bucket) -> None:
     # Generated JSON files are uploaded to a Cloud Storage folder
     # Filename format in Cloud Storage will be 'YY-mm-ddTHH:MM:SSZ-logfile.json'
     current_working_dir = Path.cwd()
-    json_files = current_working_dir.glob("*.json")
+    json_files = current_working_dir.glob("*")
     date_time_format = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+    record_num = 1
 
     for json_file in json_files:
         folder_name = json_file.stem
-        blob_path = f"{folder_name}/{date_time_format}-logfile.json"
+        blob_path = f"{folder_name}/{date_time_format}-logRecord-{record_num}.json"
+        record_num += 1
         blob = Blob(blob_path, storage_bucket)
         with open(json_file, "rb") as file:
             blob.upload_from_file(file)
