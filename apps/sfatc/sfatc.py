@@ -2,7 +2,6 @@ from utils.sflc_logger import sflc_logger
 import os
 import sys
 from utils.sflc_fileops import (
-    convert_audit_to_json,
     convert_audit_trail_to_json_files,
     upload_to_storage_bucket,
 )
