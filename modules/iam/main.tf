@@ -29,14 +29,14 @@ locals {
 }
 # Assign Cloud Storage IAM roles
 resource "google_storage_bucket_iam_member" "storage_object_creator_role" {
-    for_each = {for indx, val in local.cloud_run_service_accounts: indx => val}
+    for_each = {for k, v in local.cloud_run_service_accounts: k => v}
     bucket = var.cloud_storage_bucket
     role = "roles/storage.objectCreator"
     member = each.value
 }
 
 resource "google_storage_bucket_iam_member" "storage_legacy_bucket_reader_role" {
-    for_each = {for indx, val in local.cloud_run_service_accounts: indx => val}
+    for_each = {for k, v in local.cloud_run_service_accounts: k => v}
     bucket = var.cloud_storage_bucket
     role = "roles/storage.legacyBucketReader"
     member = each.value

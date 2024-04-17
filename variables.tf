@@ -21,6 +21,13 @@ variable "zone" {
     default = "northamerica-northeast1-a"
 }
 
+# VPC variable
+variable "ip_cidr_range" {
+    type = string
+    description = "IP CIDR Range for VPC Connector"
+    default = "192.168.1.0/28"
+}
+
 # Cloud Storage Variables
 variable "cloud_storage_bucket" {
     type = string

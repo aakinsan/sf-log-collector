@@ -59,6 +59,14 @@ module "iam" {
     sfatc_job_name = module.serverless.sfatc_job  
 }
 
+# Module for Network Connections
+module "network" {
+    source = "./modules/network"
+    project_id = var.project_id
+    region = var.region
+    ip_cidr_range = var.ip_cidr_range 
+}
+
 # Module for the Cloud Run Instances and Cloud Scheduler
 module "serverless" {
     source = "./modules/serverless"
@@ -71,6 +79,8 @@ module "serverless" {
     scheduler_service_account = module.iam.scheduler_service_account
     env = var.env
     repo_name = module.storage.repository_name
+    vpc_access_connector_id = module.network.vpc_access_connector_id
+
 
     depends_on = [ module.storage ]
 }

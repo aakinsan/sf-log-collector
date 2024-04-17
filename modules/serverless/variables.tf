@@ -43,3 +43,8 @@ variable "env" {
     description = "Enviromental Variables for containers"
 }
 
+variable "vpc_access_connector_id" {
+    type = string
+    description = "VPC connector"
+}
+
