@@ -59,6 +59,10 @@ resource "google_cloud_run_v2_job" "sfatc" {
           }
         }
       }
+      vpc_access{
+        connector = var.vpc_access_connector_id
+        egress = "ALL_TRAFFIC"
+      }
       service_account = var.sfatc_service_account
     }
   }
