@@ -1,9 +1,23 @@
+# Enable the Compute Engine API
+resource "google_project_service" "compute_engine" {
+    project = var.project_id
+    service = "compute.googleapis.com"
+
+    timeouts {
+        create = "30m"
+        update = "40m"
+    }
+
+    disable_on_destroy = true
+}
+
 # Create VPC Network
 resource "google_compute_network" "sf-logcollector-vpc-network" {
   project = var.project_id
   name = "sf-logcollector-vpc"
   auto_create_subnetworks = false
   mtu = 1460
+  depends_on = [google_project_service.compute_engine]
 }
 
 # Create subnetwork
@@ -42,6 +56,7 @@ resource "google_compute_address" "sf-logcollector-address" {
   address_type = "EXTERNAL"
   region = var.region
   project = var.project_id
+  network = google_compute_network.sf-logcollector-vpc-network.self_link
 }
 
 # Create VPC Cloud NAT
