@@ -13,6 +13,7 @@ locals {
     app_path = "${path.root}/apps"
     sfatc_app_path = "${path.root}/apps/sfatc"
     sfelc_app_path = "${path.root}/apps/sfelc"
+    utils_app_path = "${path.root}/apps/utils"
 }
 
 # Build Docker Images
@@ -27,7 +28,8 @@ resource "docker_image" "sfelc_image" {
         }
     }
     triggers = {
-        dir_sfelc = sha1(join("", [for f in fileset(local.sfelc_app_path, "*"):filesha1("${local.sfelc_app_path}/${f}")]))
+        dir_sfelc = sha1(join("", [for f in fileset(local.sfelc_app_path, "*"):filesha1("${local.sfelc_app_path}/${f}")])),
+        dir_utils = sha1(join("", [for f in fileset(local.utils_app_path, "*"):filesha1("${local.utils_app_path}/${f}")]))
     }
 }
 
@@ -42,7 +44,8 @@ resource "docker_image" "sfatc_image" {
         }
     }
     triggers = {
-        dir_sfatc = sha1(join("", [for f in fileset(local.sfatc_app_path, "*"):filesha1("${local.sfatc_app_path}/${f}")]))
+        dir_sfatc = sha1(join("", [for f in fileset(local.sfatc_app_path, "*"):filesha1("${local.sfatc_app_path}/${f}")])),
+        dir_utils = sha1(join("", [for f in fileset(local.utils_app_path, "*"):filesha1("${local.utils_app_path}/${f}")]))
     }
 }
 
@@ -51,7 +54,8 @@ resource "docker_registry_image" "sfelc" {
     name = docker_image.sfelc_image.name
     keep_remotely = true
     triggers = {
-        dir_sfelc = sha1(join("", [for f in fileset(local.sfelc_app_path, "*"):filesha1("${local.sfelc_app_path}/${f}")]))
+        dir_sfelc = sha1(join("", [for f in fileset(local.sfelc_app_path, "*"):filesha1("${local.sfelc_app_path}/${f}")])),
+        dir_utils = sha1(join("", [for f in fileset(local.utils_app_path, "*"):filesha1("${local.utils_app_path}/${f}")]))
     }
 }
 
@@ -59,6 +63,7 @@ resource "docker_registry_image" "sfatc" {
     name = docker_image.sfatc_image.name
     keep_remotely = true
     triggers = {
-        dir_sfatc = sha1(join("", [for f in fileset(local.sfatc_app_path, "*"):filesha1("${local.sfatc_app_path}/${f}")]))
+        dir_sfatc = sha1(join("", [for f in fileset(local.sfatc_app_path, "*"):filesha1("${local.sfatc_app_path}/${f}")])),
+        dir_utils = sha1(join("", [for f in fileset(local.utils_app_path, "*"):filesha1("${local.utils_app_path}/${f}")]))
     }
 }
