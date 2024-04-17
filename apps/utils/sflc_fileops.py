@@ -66,7 +66,7 @@ def convert_audit_trail_to_json_files(data: list) -> None:
     file_ext = 0  # Required to make each file unique.
     for record in data:
         file_ext += 1
-        with open(f"Audit_Trail.{file_ext}", "w") as file:
+        with open(f"Audit_Trail.{file_ext}.json", "w") as file:
             json.dump(record, file)
 
 
@@ -88,7 +88,7 @@ def convert_csv_file_to_json_files(csv_file_name: str, downloaded_file: bytes) -
     file_ext = 0  # Required to make each file unique
     for record in records:
         file_ext += 1
-        with open(f"{csv_file_name}.{file_ext}", "w") as file:
+        with open(f"{csv_file_name}.{file_ext}.json", "w") as file:
             json.dump(record, file)
 
 
@@ -103,7 +103,7 @@ def write_to_bucket_blobs(storage_bucket: Bucket) -> None:
     # Generated JSON files are uploaded to a Cloud Storage folder
     # Filename format in Cloud Storage will be 'YY-mm-ddTHH:MM:SSZ-logfile.json'
     current_working_dir = Path.cwd()
-    json_files = current_working_dir.glob("*")
+    json_files = current_working_dir.glob("*.json")
     date_time_format = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
     record_num = 1
 
