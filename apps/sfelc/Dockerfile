@@ -29,5 +29,8 @@ RUN chown sflcuser .
 # Change the user from root to sflcuser
 USER sflcuser
 
+# Create Scratch Folder
+RUN mkdir /app/scratch
+
 # Run the web service on container startup.
 CMD [ "python", "./sfelc.py" ]
