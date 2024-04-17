@@ -11,6 +11,19 @@ resource "google_project_service" "compute_engine" {
     disable_on_destroy = true
 }
 
+# Enable the VPC Access API
+resource "google_project_service" "vpc_access" {
+    project = var.project_id
+    service = "vpcaccess.googleapis.com"
+
+    timeouts {
+        create = "30m"
+        update = "40m"
+    }
+
+    disable_on_destroy = true
+}
+
 # Create VPC Network
 resource "google_compute_network" "sf-logcollector-vpc-network" {
   project = var.project_id
@@ -40,6 +53,8 @@ resource "google_vpc_access_connector" "sf-logcollector-connector" {
   max_instances = 3
   region = var.region
   project = var.project_id
+
+  depends_on = [google_project_service.vpc_access]
 }
 
 # Create VPC Router
