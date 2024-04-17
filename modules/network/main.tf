@@ -71,7 +71,6 @@ resource "google_compute_address" "sf-logcollector-address" {
   address_type = "EXTERNAL"
   region = var.region
   project = var.project_id
-  network = google_compute_network.sf-logcollector-vpc-network.self_link
 }
 
 # Create VPC Cloud NAT
