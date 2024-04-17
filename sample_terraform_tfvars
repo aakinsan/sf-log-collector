@@ -1,0 +1,31 @@
+/*
+Sample Terraform.tfvars file
+
+Remove the comment characters and add your values
+
+Note that the EVENT_TYPES environmental variable should follow the exact pattern depicted below - i.e a space after the commas
+
+The storage bucket's storage class is set by default to 'STANDARD' and the Region and Zone is set by default to northamerica-northeast1 and northamerica-northeast1-a repectively
+
+You can change this default values here:
+*/
+
+project_id = "log-collector-project"
+cloud_storage_bucket = "sf-log-bucket"
+storage_class = "STANDARD"
+secrets_project_id = "log-collector-project"
+region = "northamerica-northeast1"
+repo_name = "sflogrepo"
+zone = "northamerica-northeast1-a"
+secret_id = "salesforce-log-collector-secret"
+env = {    
+    "GOOGLE_PROJECT_ID" = "log-collector-project"  
+    "CLIENT_ID" = "3443k4k5k435434k4k64645j34lgk534q5kl43MVG9M43ertr567rgttrt754grtrrert.5jc4joSXeusrlwO"    
+    "AUDIENCE" = "https://test.salesforce.com"     
+    "SUBJECT" = "log.collector@foobar.com"    
+    "SECRET_ID" = "salesforce-log-collector-secret"    
+    "CLOUD_STORAGE_BUCKET" = "sf-log-bucket"    
+    "TOKEN_ENDPOINT" = "https://test.salesforce.com/services/oauth2/token"    
+    "GOOGLE_SECRETS_PROJECT_ID" = "log-collector-project"    
+    "EVENT_TYPES" = "Login, Logout, URI, RestApi, API, Report, ReportExport, BulkApi, BulkApi2, LoginAs"
+    }  
